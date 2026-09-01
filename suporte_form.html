@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}
+Registro de Suporte | Gestão de TI
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+
+            {% if suporte %}
+                Editar registro de suporte
+            {% else %}
+                Registrar suporte
+            {% endif %}
+
+        </h1>
+
+        <p>
+            Registre o atendimento técnico realizado.
+        </p>
+
+    </div>
+
+</div>
+
+
+<form method="POST" class="form-card">
+
+
+    <label>
+
+        Equipamento
+
+        <select
+            name="id_equipamento"
+            required
+        >
+
+            <option value="">
+                Selecione o equipamento
+            </option>
+
+
+            {% for equipamento in equipamentos %}
+
+            <option
+                value="{{ equipamento.id }}"
+                {% if suporte and suporte.id_equipamento == equipamento.id %}
+                    selected
+                {% endif %}
+            >
+
+                {{ equipamento.patrimonio }}
+                -
+                {{ equipamento.tipo }}
+                -
+                {{ equipamento.modelo }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </label>
+
+
+    <label>
+
+        Data do suporte
+
+        <input
+            type="date"
+            name="data_suporte"
+            required
+            value="{{ suporte.data_suporte.strftime('%Y-%m-%d') if suporte else '' }}"
+        >
+
+    </label>
+
+
+    <label>
+
+        Tipo de suporte
+
+        <select
+            name="tipo_suporte"
+            required
+        >
+
+            <option value="Manutenção Corretiva">
+                Manutenção Corretiva
+            </option>
+
+            <option value="Manutenção Preventiva">
+                Manutenção Preventiva
+            </option>
+
+            <option value="Atualização de Software">
+                Atualização de Software
+            </option>
+
+            <option value="Troca de Peça">
+                Troca de Peça
+            </option>
+
+            <option value="Suporte Técnico">
+                Suporte Técnico
+            </option>
+
+        </select>
+
+    </label>
+
+
+    <label>
+
+        Descrição do problema e solução
+
+        <textarea
+            name="descricao"
+            rows="7"
+            required
+        >{{ suporte.descricao if suporte else '' }}</textarea>
+
+    </label>
+
+
+    <label>
+
+        Responsável
+
+        <input
+            type="text"
+            name="responsavel"
+            required
+            value="{{ suporte.responsavel if suporte else '' }}"
+        >
+
+    </label>
+
+
+    <label>
+
+        Custo
+
+        <input
+            type="number"
+            name="custo"
+            step="0.01"
+            min="0"
+            value="{{ suporte.custo if suporte else '0' }}"
+        >
+
+    </label>
+
+
+    <button
+        class="btn"
+        type="submit"
+    >
+        Salvar registro
+    </button>
+
+
+    <a
+        href="{{ url_for('suportes') }}"
+    >
+        Cancelar
+    </a>
+
+
+</form>
+
+{% endblock %}

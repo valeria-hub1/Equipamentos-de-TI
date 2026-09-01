@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block title %}
+Suporte Técnico | Gestão de TI
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+            Registros de Suporte
+        </h1>
+
+        <p>
+            Histórico de manutenções e atendimentos técnicos.
+        </p>
+
+    </div>
+
+
+    <a
+        class="btn"
+        href="{{ url_for('novo_suporte') }}"
+    >
+        + Novo suporte
+    </a>
+
+</div>
+
+
+<div class="table-wrap">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Equipamento</th>
+
+                <th>Data</th>
+
+                <th>Tipo de suporte</th>
+
+                <th>Responsável</th>
+
+                <th>Custo</th>
+
+                <th>Ações</th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            {% for suporte in suportes %}
+
+            <tr>
+
+                <td>
+                    {{ suporte.id }}
+                </td>
+
+
+                <td>
+                    {{ suporte.equipamento.patrimonio }}
+                </td>
+
+
+                <td>
+                    {{ suporte.data_suporte.strftime('%d/%m/%Y') }}
+                </td>
+
+
+                <td>
+                    {{ suporte.tipo_suporte }}
+                </td>
+
+
+                <td>
+                    {{ suporte.responsavel }}
+                </td>
+
+
+                <td>
+
+                    R$ {{ "%.2f"|format(
+                        suporte.custo or 0
+                    ) }}
+
+                </td>
+
+
+                <td>
+
+                    <a
+                        href="{{ url_for('editar_suporte', id=suporte.id) }}"
+                    >
+                        Editar
+                    </a>
+
+
+                    <form
+                        method="POST"
+                        action="{{ url_for('excluir_suporte', id=suporte.id) }}"
+                        class="inline-form"
+                    >
+
+                        <button
+                            type="submit"
+                            class="btn-danger"
+                        >
+                            Excluir
+                        </button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+            {% else %}
+
+            <tr>
+
+                <td colspan="7">
+                    Nenhum registro de suporte cadastrado.
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}
+Início | Gestão de TI
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <span class="eyebrow">
+        SISTEMA DE GESTÃO DE TI
+    </span>
+
+    <h1>
+        Gestão de Equipamentos de TI
+    </h1>
+
+    <p>
+        Centralize o controle dos equipamentos,
+        manutenções e atendimentos técnicos da empresa.
+    </p>
+
+    <a
+        class="btn"
+        href="{{ url_for('novo_equipamento') }}"
+    >
+        + Cadastrar equipamento
+    </a>
+
+</section>
+
+
+<section class="cards">
+
+    <div class="card">
+
+        <span>
+            Equipamentos
+        </span>
+
+        <strong>
+            {{ equipamentos }}
+        </strong>
+
+    </div>
+
+
+    <div class="card">
+
+        <span>
+            Em uso
+        </span>
+
+        <strong>
+            {{ em_uso }}
+        </strong>
+
+    </div>
+
+
+    <div class="card">
+
+        <span>
+            Em manutenção
+        </span>
+
+        <strong>
+            {{ manutencao }}
+        </strong>
+
+    </div>
+
+
+    <div class="card">
+
+        <span>
+            Registros de suporte
+        </span>
+
+        <strong>
+            {{ suportes }}
+        </strong>
+
+    </div>
+
+</section>
+
+
+<section class="panel">
+
+    <h2>
+        Funcionalidades do sistema
+    </h2>
+
+    <div class="features">
+
+        <div>
+
+            <h3>
+                📦 Equipamentos
+            </h3>
+
+            <p>
+                Cadastre e acompanhe todos os equipamentos
+                de tecnologia da empresa.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                🔧 Suporte técnico
+            </h3>
+
+            <p>
+                Registre manutenções, atendimentos,
+                troca de peças e custos.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                📊 Relatórios
+            </h3>
+
+            <p>
+                Consulte informações do inventário
+                de equipamentos.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

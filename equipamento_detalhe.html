@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}
+Detalhes do Equipamento | Gestão de TI
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+            Equipamento {{ equipamento.patrimonio }}
+        </h1>
+
+        <p>
+            Detalhes e histórico do equipamento.
+        </p>
+
+    </div>
+
+
+    <a
+        class="btn"
+        href="{{ url_for('editar_equipamento', id=equipamento.id) }}"
+    >
+        Editar equipamento
+    </a>
+
+</div>
+
+
+<section class="panel">
+
+    <h2>
+        Dados do equipamento
+    </h2>
+
+
+    <p>
+        <strong>ID:</strong>
+        {{ equipamento.id }}
+    </p>
+
+
+    <p>
+        <strong>Patrimônio:</strong>
+        {{ equipamento.patrimonio }}
+    </p>
+
+
+    <p>
+        <strong>Tipo:</strong>
+        {{ equipamento.tipo }}
+    </p>
+
+
+    <p>
+        <strong>Marca:</strong>
+        {{ equipamento.marca }}
+    </p>
+
+
+    <p>
+        <strong>Modelo:</strong>
+        {{ equipamento.modelo }}
+    </p>
+
+
+    <p>
+        <strong>Número de série:</strong>
+        {{ equipamento.numero_serie }}
+    </p>
+
+
+    <p>
+        <strong>Data de aquisição:</strong>
+
+        {{ equipamento.data_aquisicao.strftime('%d/%m/%Y') }}
+
+    </p>
+
+
+    <p>
+        <strong>Localização:</strong>
+        {{ equipamento.localizacao }}
+    </p>
+
+
+    <p>
+        <strong>Status:</strong>
+        {{ equipamento.status }}
+    </p>
+
+</section>
+
+
+<section class="panel">
+
+    <div class="page-header">
+
+        <h2>
+            Histórico de suporte
+        </h2>
+
+        <a
+            class="btn"
+            href="{{ url_for('novo_suporte') }}"
+        >
+            + Registrar suporte
+        </a>
+
+    </div>
+
+
+    {% for suporte in suportes %}
+
+        <div class="support-item">
+
+            <h3>
+                {{ suporte.tipo_suporte }}
+            </h3>
+
+            <p>
+
+                <strong>
+                    Data:
+                </strong>
+
+                {{ suporte.data_suporte.strftime('%d/%m/%Y') }}
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    Descrição:
+                </strong>
+
+                {{ suporte.descricao }}
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    Responsável:
+                </strong>
+
+                {{ suporte.responsavel }}
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    Custo:
+                </strong>
+
+                R$ {{ "%.2f"|format(suporte.custo or 0) }}
+
+            </p>
+
+        </div>
+
+    {% else %}
+
+        <p>
+            Nenhum registro de suporte encontrado.
+        </p>
+
+    {% endfor %}
+
+</section>
+
+{% endblock %}

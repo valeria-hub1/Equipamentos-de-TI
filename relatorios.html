@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}
+Relatórios | Gestão de TI
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+            Relatórios
+        </h1>
+
+        <p>
+            Informações do inventário de equipamentos.
+        </p>
+
+    </div>
+
+</div>
+
+
+<section class="panel">
+
+    <h2>
+        Inventário de equipamentos
+    </h2>
+
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Patrimônio</th>
+
+                    <th>Tipo</th>
+
+                    <th>Marca</th>
+
+                    <th>Modelo</th>
+
+                    <th>Nº Série</th>
+
+                    <th>Localização</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for equipamento in equipamentos %}
+
+                <tr>
+
+                    <td>
+                        {{ equipamento.patrimonio }}
+                    </td>
+
+                    <td>
+                        {{ equipamento.tipo }}
+                    </td>
+
+                    <td>
+                        {{ equipamento.marca }}
+                    </td>
+
+                    <td>
+                        {{ equipamento.modelo }}
+                    </td>
+
+                    <td>
+                        {{ equipamento.numero_serie }}
+                    </td>
+
+                    <td>
+                        {{ equipamento.localizacao }}
+                    </td>
+
+                    <td>
+                        {{ equipamento.status }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td colspan="7">
+                        Nenhum equipamento cadastrado.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}
